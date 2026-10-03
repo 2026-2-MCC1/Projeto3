@@ -52,10 +52,8 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.6.3f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/TargetingPacks/netstandard2.1/analyzers/dotnet/roslyn4.0/cs/System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/Combate/Boss.cs" />
+    <Compile Include="Assets/Scripts/Combate/BossData.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
-    <Compile Include="Assets/Scripts/Combate/Button.cs" />
-    <Compile Include="Assets/Scripts/Combate/Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
