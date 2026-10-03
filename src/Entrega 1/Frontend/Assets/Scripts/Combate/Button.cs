@@ -37,7 +37,9 @@ public class Button : MonoBehaviour
                 break;
         }
 
-        if (pressionou)
+
+
+        if (pressionou && boss.estaVivo)
         {
             boss.ReceberDano(10);
             Debug.Log("Botão pressionado: " + tecla);
