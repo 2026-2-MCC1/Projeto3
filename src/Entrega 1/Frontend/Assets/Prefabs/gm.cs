@@ -75,7 +75,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         noteMark += 1;
         timerResert = "y";
-        Instantiate(noteObj, new Vector3(xPos, 3f, 3.246f), noteObj.rotation);
+        Instantiate(noteObj, new Vector3(xPos, 3f, 3.2f), noteObj.rotation);
 
     }
 
