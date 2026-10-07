@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7783670808930177444}
   - component: {fileID: 1511983146355390815}
   - component: {fileID: 7897348751109663166}
-  - component: {fileID: 8080941053909270553}
+  - component: {fileID: 2376023348062687189}
   m_Layer: 0
   m_Name: note
   m_TagString: Untagged
@@ -136,12 +136,12 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8080941053909270553
+--- !u!114 &2376023348062687189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,6 +150,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 884325766885672194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5f32dddd8bcad4ab887f8ac37292de, type: 3}
+  m_Script: {fileID: 11500000, guid: 050350da8bcfcf242be705713ecedac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Note

@@ -205,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.585, y: 2.02, z: -7.76}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00006707385}
+  m_LocalPosition: {x: 0.3, y: 0.9, z: 11.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.992, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 650727509643321560, guid: 1a516b5424fdb20469843af6808b1b61, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.95134
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 650727509643321560, guid: 1a516b5424fdb20469843af6808b1b61, type: 3}
       propertyPath: m_LocalRotation.w
@@ -631,7 +631,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719252b35059de14c8f09b14f9e78467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteSpawner
-  notePrefab: {fileID: 1513937229}
+  notePrefabs:
+  - {fileID: 6229877531685045494, guid: 0eba06001f5f07249a0a5f361596af8e, type: 3}
+  - {fileID: 2939945090456416409, guid: ad3a3107a4508ee42b1325946f43a7e4, type: 3}
+  - {fileID: 7180769383619698814, guid: 6ed83f24abf0fe644be7db1941f142ba, type: 3}
+  - {fileID: 4914322468002835920, guid: f5847cbe41cac4547b68015e035ca08e, type: 3}
   laneX:
   - -0.691
   - 0.093
@@ -639,7 +643,7 @@ MonoBehaviour:
   - 1.579
   spawnY: 0.5
   spawnZ: 3.2
-  noteSpeed: 5
+  noteSpeed: 3
   moveDirection: {x: 0, y: 0, z: 1}
   noteLifetime: 6
   minInterval: 0.5
@@ -788,11 +792,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5483169748301566706, guid: 0f21332489170164398a6ea2ae3dc4d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.324
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 5483169748301566706, guid: 0f21332489170164398a6ea2ae3dc4d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.57
+      value: 6.86
       objectReference: {fileID: 0}
     - target: {fileID: 5483169748301566706, guid: 0f21332489170164398a6ea2ae3dc4d2, type: 3}
       propertyPath: m_LocalRotation.w
