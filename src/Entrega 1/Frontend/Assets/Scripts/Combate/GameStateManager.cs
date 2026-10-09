@@ -1,40 +1,33 @@
 using UnityEngine;
 
-public enum GameState
-{
-    Playing,
-    Victory,
-    Defeat,
-    GameComplete
-}
+public enum GameState { Playing, Victory, Defeat, GameComplete }
 
 public class GameStateManager : MonoBehaviour
 {
-    public GameState currentState;
+    public static GameState Current = GameState.Playing;
+    public GameState currentState;   // só para ver no Inspector
 
-    void Start()
+    void Awake() { Set(GameState.Playing); }
+
+    void OnEnable()
     {
-        currentState = GameState.Playing;
+        GameEvents.OnBossDefeated += HandleBossDefeated;
+        GameEvents.OnPlayerDefeated += HandlePlayerDefeated;
     }
 
-    public void SetVictory()
+    void OnDisable()
     {
-        currentState = GameState.Victory;
-
-        Debug.Log("VICTORY!");
+        GameEvents.OnBossDefeated -= HandleBossDefeated;
+        GameEvents.OnPlayerDefeated -= HandlePlayerDefeated;
     }
 
-    public void SetDefeat()
-    {
-        currentState = GameState.Defeat;
+    void Set(GameState s) { Current = s; currentState = s; }
 
-        Debug.Log("DEFEAT!");
+    void HandleBossDefeated(int phase)
+    {
+        Set(phase >= 3 ? GameState.GameComplete : GameState.Victory);
+        GameEvents.PhaseCompleted(phase);
     }
 
-    public void SetGameComplete()
-    {
-        currentState = GameState.GameComplete;
-
-        Debug.Log("GAME COMPLETE!");
-    }
+    void HandlePlayerDefeated() { Set(GameState.Defeat); }
 }
