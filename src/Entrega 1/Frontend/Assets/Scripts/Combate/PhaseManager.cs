@@ -3,23 +3,23 @@ using UnityEngine.SceneManagement;
 
 public class PhaseManager : MonoBehaviour
 {
-    public int currentPhase = 1;
+    public static int CurrentPhase
+    {
+        get
+        {
+            string n = SceneManager.GetActiveScene().name;
+            if (n.StartsWith("Phase") && int.TryParse(n.Substring(5), out int p)) return p;
+            return 1; // SampleScene / testes
+        }
+    }
 
+    // Chamado pelo botão "Próxima fase" da tela de vitória (Pessoa 3) ou pelo SceneFlowManager.
     public void LoadNextPhase()
     {
-        currentPhase++;
-
-        if (currentPhase > 3)
-        {
-            CompleteGame();
-            return;
-        }
-
-        SceneManager.LoadScene("Phase" + currentPhase);
+        int next = CurrentPhase + 1;
+        if (next > 3) { Debug.Log("GAME COMPLETE! -> Caixa de Bombom"); return; }
+        SceneManager.LoadScene("Phase" + next);
     }
 
-    private void CompleteGame()
-    {
-        Debug.Log("GAME COMPLETE!");
-    }
+    public void RestartPhase() { SceneManager.LoadScene("Phase" + CurrentPhase); }
 }
