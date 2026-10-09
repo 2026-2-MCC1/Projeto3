@@ -52,6 +52,7 @@
     <Compile Include="Assets/Scripts/Notas/NoteSpawner.cs" />
     <Compile Include="Assets/Scripts/Notas/Note.cs" />
     <Compile Include="Assets/Scripts/Combate/BossData.cs" />
+    <Compile Include="Assets/Scripts/Rhythm/JudgmentSystem.cs" />
     <Compile Include="Assets/Scripts/Combate/PhaseManager.cs" />
     <Compile Include="Assets/Scripts/Core/GameEvents.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
