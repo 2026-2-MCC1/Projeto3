@@ -8,12 +8,13 @@ public class PlayerLivesUI : MonoBehaviour
     [SerializeField] private Image life3;
 
     private int lives = 3;
+    public int CurrentLives => lives;
 
     private void OnEnable()
     {
         GameEvents.OnPlayerLifeLost += LoseLife;
     }
-
+        
     private void OnDisable()
     {
         GameEvents.OnPlayerLifeLost -= LoseLife;
