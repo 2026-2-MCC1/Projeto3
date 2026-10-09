@@ -53,14 +53,14 @@
     <Compile Include="Assets\Scripts\Notas\NoteSpawner.cs" />
     <Compile Include="Assets\Scripts\Notas\Note.cs" />
     <Compile Include="Assets\Scripts\Combate\BossData.cs" />
-    <Compile Include="Assets\Scripts\Rhythm\JudgmentSystem.cs" />
+    <Compile Include="Assets\Scripts\Notas\InputManager.cs" />
     <Compile Include="Assets\Scripts\Combate\PhaseManager.cs" />
     <Compile Include="Assets\Scripts\Core\GameEvents.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Combate\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Combate\GameStateManager.cs" />
-    <Compile Include="Assets\Scripts\Rhythm\InputManager.cs" />
     <Compile Include="Assets\Scripts\Combate\BossController.cs" />
+    <Compile Include="Assets\Scripts\Notas\JudgmentSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
