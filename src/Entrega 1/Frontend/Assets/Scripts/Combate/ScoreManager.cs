@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -56,17 +55,5 @@ public class ScoreManager : MonoBehaviour
             " | Combo: " + combo +
             " | Multiplier: x" + GetMultiplier()
         );
-    }
-
-    void Update()
-    {
-        if (Keyboard.current.jKey.wasPressedThisFrame)
-            RegisterPerfect();
-
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-            RegisterGood();
-
-        if (Keyboard.current.lKey.wasPressedThisFrame)
-            RegisterMiss();
     }
 }

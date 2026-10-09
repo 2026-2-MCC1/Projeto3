@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerLives : MonoBehaviour
 {
@@ -30,13 +29,5 @@ public class PlayerLives : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("GAME OVER!");
-    }
-
-    void Update()
-    {
-        if (Keyboard.current.dKey.wasPressedThisFrame)
-        {
-            LoseLife();
-        }
     }
 }
