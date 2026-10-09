@@ -4,47 +4,51 @@ using UnityEngine.InputSystem;
 public class BossController : MonoBehaviour
 {
     public BossData bossData;
+    public bool debugKeys = false;   // A = dano perfeito, S = dano bom (só para teste isolado)
 
-    private int currentHealth;
+    int currentHealth;
+    bool defeated;
+
+    void OnEnable() { GameEvents.OnNoteJudged += HandleJudgment; }
+    void OnDisable() { GameEvents.OnNoteJudged -= HandleJudgment; }
 
     void Start()
     {
         currentHealth = bossData.maxHealth;
-
-        Debug.Log("Boss started with " + currentHealth + " health.");
+        GameEvents.BossHealthChanged(currentHealth, bossData.maxHealth);
     }
 
-    // Apenas para testar
+    void HandleJudgment(Judgment j)
+    {
+        switch (j)
+        {
+            case Judgment.Perfect: TakeDamage(bossData.perfectDamage); break;
+            case Judgment.Good: TakeDamage(bossData.goodDamage); break;
+            case Judgment.Miss: break; // Errou = 0 de dano (a vida do jogador é no PlayerLives)
+        }
+    }
+
     void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            TakeDamage(bossData.perfectDamage);
-        }
-
-        if (Keyboard.current.sKey.wasPressedThisFrame)
-        {
-            TakeDamage(bossData.goodDamage);
-        }
+        if (!debugKeys || Keyboard.current == null) return;
+        if (Keyboard.current.aKey.wasPressedThisFrame) TakeDamage(bossData.perfectDamage);
+        if (Keyboard.current.sKey.wasPressedThisFrame) TakeDamage(bossData.goodDamage);
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (defeated || GameStateManager.Current != GameState.Playing) return;
 
-        Debug.Log("Boss took " + damage + " damage.");
-        Debug.Log("Current health: " + currentHealth);
+        currentHealth = Mathf.Max(0, currentHealth - damage);
+        GameEvents.BossHealthChanged(currentHealth, bossData.maxHealth);
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        if (currentHealth <= 0) Die();
     }
 
-    private void Die()
+    void Die()
     {
-        Debug.Log("BOSS DEFEATED!");
-
+        defeated = true;
+        GameEvents.BossDefeated(PhaseManager.CurrentPhase);
         gameObject.SetActive(false);
     }
 }

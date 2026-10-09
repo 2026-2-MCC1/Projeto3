@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32064b23cfe6e4b6a80b1daff23b19d7, type: 3}
   m_Name: SevenBelos_Data
   m_EditorClassIdentifier: Assembly-CSharp::BossData
-  bossName: 
+  bossName: 7 Belos
   maxHealth: 150
   perfectDamage: 20
   goodDamage: 10

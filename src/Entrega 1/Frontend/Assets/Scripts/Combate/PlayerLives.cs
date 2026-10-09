@@ -4,39 +4,37 @@ using UnityEngine.InputSystem;
 public class PlayerLives : MonoBehaviour
 {
     public int maxLives = 3;
+    public bool debugKeys = false;   // D = perder vida (só para teste isolado)
 
-    private int currentLives;
+    int currentLives;
+
+    void OnEnable() { GameEvents.OnNoteJudged += HandleJudgment; }
+    void OnDisable() { GameEvents.OnNoteJudged -= HandleJudgment; }
 
     void Start()
     {
         currentLives = maxLives;
+        GameEvents.PlayerLifeLost(currentLives, maxLives); // atualiza o HUD no início
+    }
 
-        Debug.Log("Lives: " + currentLives);
+    void HandleJudgment(Judgment j)
+    {
+        if (j == Judgment.Miss) LoseLife();
     }
 
     public void LoseLife()
     {
+        if (currentLives <= 0 || GameStateManager.Current != GameState.Playing) return;
+
         currentLives--;
+        GameEvents.PlayerLifeLost(currentLives, maxLives);
 
-        Debug.Log("Life lost!");
-        Debug.Log("Remaining lives: " + currentLives);
-
-        if (currentLives <= 0)
-        {
-            GameOver();
-        }
-    }
-
-    private void GameOver()
-    {
-        Debug.Log("GAME OVER!");
+        if (currentLives <= 0) GameEvents.PlayerDefeated();
     }
 
     void Update()
     {
-        if (Keyboard.current.dKey.wasPressedThisFrame)
-        {
+        if (debugKeys && Keyboard.current != null && Keyboard.current.dKey.wasPressedThisFrame)
             LoseLife();
-        }
     }
 }
