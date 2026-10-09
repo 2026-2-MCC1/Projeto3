@@ -1,26 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-// Colocar no PREFAB da nota (a bola/doce que anda pela pista).
-// Ela anda em linha reta (sem gravidade, sem precisar inclinar a pista)
-// e se destrói sozinha depois de alguns segundos.
 public class Note : MonoBehaviour
 {
+    public static readonly List<Note> Active = new List<Note>();
+
+    public int Lane { get; private set; }
+    public Vector3 Direction => direction;
+    public bool Judged { get; private set; }
+
     float speed;
     Vector3 direction;
 
-    // Chamado pelo NoteSpawner logo depois de criar a nota.
-    public void Init(float speed, Vector3 direction, float lifetime)
+    void OnEnable() { Active.Add(this); }
+    void OnDisable() { Active.Remove(this); }
+
+    public void Init(float speed, Vector3 direction, float lifetime, int lane)
     {
         this.speed = speed;
         this.direction = direction.normalized;
-
-        // Remove o objeto da cena e libera a memória depois de 'lifetime' segundos.
+        Lane = lane;
         Destroy(gameObject, lifetime);
+    }
+
+    public void Consume()
+    {
+        Judged = true;
+        Destroy(gameObject);
     }
 
     void Update()
     {
-        // Movimento constante (MRU): deslocamento = velocidade x tempo do quadro.
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
 }
