@@ -358,8 +358,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548211324}
-  - component: {fileID: 548211325}
   - component: {fileID: 548211326}
+  - component: {fileID: 548211325}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -395,8 +395,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JudgmentSystem
   hitZone: {fileID: 1751381159}
-  perfectWindow: 0.4
+  hitZoneCollider: {fileID: 0}
+  perfectWindow: 0.25
   goodWindow: 0.6
+  edgeTolerance: 0.25
+  anyKeyHitsAnyLane: 1
   emptyTapIsMiss: 1
 --- !u!114 &548211326
 MonoBehaviour:
