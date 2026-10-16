@@ -68,6 +68,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\PlayerTestMovement.cs" />
     <Compile Include="Assets\Scripts\Shared\BossData.cs" />
     <Compile Include="Assets\Scripts\UI\DefeatUI.cs" />
     <Compile Include="Assets\Scripts\Shared\PhaseChartData.cs" />
