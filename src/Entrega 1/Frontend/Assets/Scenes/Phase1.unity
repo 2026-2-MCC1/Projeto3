@@ -358,8 +358,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548211324}
-  - component: {fileID: 548211326}
-  - component: {fileID: 548211325}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -382,38 +380,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &548211325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548211323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 709fec598d6b54bc59788508c598d372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JudgmentSystem
-  hitZone: {fileID: 1751381159}
-  hitZoneCollider: {fileID: 0}
-  perfectWindow: 0.25
-  goodWindow: 0.6
-  edgeTolerance: 0.25
-  anyKeyHitsAnyLane: 1
-  emptyTapIsMiss: 1
---- !u!114 &548211326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548211323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7399c4118623949ffb1305d530e7a628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  laneKeys: 12000000140000001800000019000000
 --- !u!1 &650398634
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +909,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ebce5e8938d8a4082c5a7c7ae017cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitZone
+  teclas: 1200000014000000190000001a000000
+  folga: 0.25
+  cubo: {fileID: 0}
 --- !u!1001 &1851921726
 PrefabInstance:
   m_ObjectHideFlags: 0
