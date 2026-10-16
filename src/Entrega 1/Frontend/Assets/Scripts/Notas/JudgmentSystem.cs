@@ -5,7 +5,7 @@ using UnityEngine;
 public class JudgmentSystem : MonoBehaviour
 {
     public Transform hitZone;
-    public float perfectWindow = 0.25f;   
+    public float perfectWindow = 0.25f;
     public float goodWindow = 0.6f;
     public bool emptyTapIsMiss = false;   // apertar sem nota por perto conta como erro?
 
@@ -24,7 +24,6 @@ public class JudgmentSystem : MonoBehaviour
     void HandleLane(int lane)
     {
         if (hitZone == null) return;
-        if (GameStateManager.Current != GameState.Playing) return;
 
         Note best = null;
         float bestDist = float.MaxValue;
@@ -57,7 +56,6 @@ public class JudgmentSystem : MonoBehaviour
     void Update()
     {
         if (hitZone == null) return;
-        if (GameStateManager.Current != GameState.Playing) return;
 
         // copia a lista: Consume() pode alterar Note.Active durante o loop
         buffer.Clear();
