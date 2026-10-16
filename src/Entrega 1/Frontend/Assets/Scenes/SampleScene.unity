@@ -488,14 +488,10 @@ MonoBehaviour:
   - 1.579
   spawnY: 0.5
   spawnZ: 3.2
-  noteSpeed: 3
-  moveDirection: {x: 0, y: 0, z: 1}
-  noteLifetime: 6
-  minInterval: 0.5
-  maxInterval: 1.5
-  randomLanes: 1
-  loopPattern: 1
-  pattern: 01000000020000000300000004000000020000000300000002000000010000000200000002000000030000000400000003000000010000000200000004000000030000000100000002000000040000000100000001000000030000000100000004000000
+  hitZ: 10
+  travelTime: 2
+  spawnInterval: 1
+  fixedLane: 0
 --- !u!1 &1825190121
 GameObject:
   m_ObjectHideFlags: 0

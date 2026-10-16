@@ -1,77 +1,58 @@
 using System.Collections;
 using UnityEngine;
 
+// VERSÃO PROVISÓRIA, só para a nova Note funcionar.
+// Será substituída pelo "NoteSpawner de teste" (item 3), com spawnPoints, hitPoints e JudgmentSystem.
 // Colocar em um GameObject VAZIO chamado "NoteSpawner" (não no prefab da nota).
 public class NoteSpawner : MonoBehaviour
 {
     [Header("Prefabs das notas: 1 por pista, na mesma ordem do Lane X")]
     public Note[] notePrefabs = new Note[4];
 
-    [Header("Posição de saída")]
+    [Header("Posição das pistas")]
     public float[] laneX = { -0.691f, 0.093f, 0.858f, 1.579f }; // X de cada pista
-    public float spawnY = 0.5f;   // altura da nota (use a altura da superfície da pista)
-    public float spawnZ = 3.2f;   // ponto de saída no começo da pista
+    public float spawnY = 0.5f;   // altura da nota (superfície da pista)
+    public float spawnZ = 0f;     // onde a nota nasce (começo da pista)
+    public float hitZ = 10f;      // onde fica a linha das teclas (fim da pista)
 
-    [Header("Movimento da nota")]
-    public float noteSpeed = 3f;                    // velocidade (unidades por segundo)
-    public Vector3 moveDirection = Vector3.forward; // para onde a nota anda
-    public float noteLifetime = 6f;                 // segundos até a nota ser destruída
+    [Header("Tempo")]
+    public float travelTime = 2f;     // segundos da saída até a tecla
+    public float spawnInterval = 1f;  // segundos entre notas
 
-    [Header("Tempo entre notas")]
-    public float minInterval = 0.5f;
-    public float maxInterval = 1.5f;
-
-    [Header("Modo de spawn")]
-    public bool randomLanes = true;                 // true = pista aleatória, false = segue o pattern
-    public bool loopPattern = true;                 // repete o pattern quando acabar
-    public int[] pattern = { 1, 2, 3, 4, 2, 3, 2, 1, 2, 2, 3, 4, 3, 1, 2, 4, 3, 1, 2, 4, 1, 1, 3, 1, 4 };
-
-    int patternIndex = 0;
+    [Header("Modo de teste")]
+    public bool fixedLane = false;    // true = sempre a pista 0
 
     void Start()
     {
-        if (notePrefabs.Length != laneX.Length)
-            Debug.LogWarning("NoteSpawner: o número de Note Prefabs precisa ser igual ao número de Lane X.");
-
+        SongClock.Begin(); // provisório: quem inicia o relógio da fase será definido depois
         StartCoroutine(SpawnLoop());
     }
 
     IEnumerator SpawnLoop()
     {
+        var wait = new WaitForSeconds(spawnInterval);
+
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            yield return wait;
 
-            int lane = GetNextLane();
-            if (lane < 0) yield break; // pattern acabou e loopPattern está desligado
+            int lane = fixedLane ? 0 : Random.Range(0, laneX.Length);
 
-            Note prefab = notePrefabs[lane]; // o prefab da pista sorteada = a cor da pista
+            Note prefab = notePrefabs[lane];
             if (prefab == null)
             {
                 Debug.LogWarning("NoteSpawner: falta um prefab no Note Prefabs, posição " + lane);
                 continue;
             }
 
-            Vector3 pos = new Vector3(laneX[lane], spawnY, spawnZ);
-            Note note = Instantiate(prefab, pos, prefab.transform.rotation);
-            note.Init(noteSpeed, moveDirection, noteLifetime);
+            Vector3 spawnPos = new Vector3(laneX[lane], spawnY, spawnZ);
+            Vector3 hitPos = new Vector3(laneX[lane], spawnY, hitZ);
+
+            // A nota deve estar na tecla travelTime segundos a partir de agora.
+            double hitTime = SongClock.Now + travelTime;
+
+            Note note = Instantiate(prefab, spawnPos, prefab.transform.rotation);
+            note.Init(lane, hitTime, spawnPos, hitPos, travelTime);
         }
-    }
-
-    // Devolve a pista (0 a 3) da próxima nota.
-    int GetNextLane()
-    {
-        if (randomLanes)
-            return Random.Range(0, laneX.Length);
-
-        if (patternIndex >= pattern.Length)
-        {
-            if (!loopPattern) return -1;
-            patternIndex = 0;
-        }
-
-        int lane = pattern[patternIndex] - 1; // o pattern usa 1 a 4, o array começa em 0
-        patternIndex++;
-        return Mathf.Clamp(lane, 0, laneX.Length - 1);
     }
 }
