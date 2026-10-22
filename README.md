@@ -17,10 +17,10 @@ TurtleHero
 ## Descrição
 
 <p align="center">
-<img src="imagens/capa.png" alt="TurtleHero" border="0">
+<img src="assets/logo-turtlehero.png" alt="TurtleHero" border="0">
 </p>
 
-**TurtleHero** é um jogo de ritmo 2D, no estilo *Guitar Hero*, desenvolvido na **Unity** com **C#**. O jogador controla a **TurtleHero** (a Tortuguita transformada em guerreira do sabor) e acompanha notas que descem por 4 pistas, apertando o botão correspondente quando elas chegam à zona de acerto. Cada acerto causa dano ao boss; cada erro custa uma das 3 vidas.
+**TurtleHero** é um jogo de ritmo 3D, no estilo *Guitar Hero*, desenvolvido na **Unity** com **C#**. O jogador controla a **TurtleHero** (a Tortuguita transformada em guerreira do sabor) e acompanha notas que descem por 4 pistas, apertando o botão correspondente quando elas chegam à zona de acerto. Cada acerto causa dano ao boss; cada erro custa uma das 3 vidas.
 
 No mundo doce da Arcor, três bosses malignos (**Big Big Bigão**, **7Belos** e **Plutonita**) aprisionaram 12 doces em suas fortalezas, 4 por boss. Para libertá-los, o jogador precisa derrotar os três bosses no ritmo. Cada doce libertado vai para a **caixa de bombom** e desbloqueia uma **curiosidade real** sobre o produto, unindo diversão, recompensa afetiva e conteúdo educativo.
 
