@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1187893565575644777}
   - component: {fileID: 3878744795144073987}
   - component: {fileID: 5300659780032792106}
-  - component: {fileID: 8449308523228934613}
   m_Layer: 0
   m_Name: Boss_BigBigBigao
   m_TagString: Untagged
@@ -114,16 +113,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8449308523228934613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3057319435369128571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd76dd1d657654307b78b4ff3e4c4cde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossController
-  bossData: {fileID: 11400000, guid: f19655f23f5b04465b64c7dcd94ddfc2, type: 2}
