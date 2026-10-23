@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CombateManager : MonoBehaviour
+public class Combate : MonoBehaviour
 {
     // Passo 1: criar o script que cuida do combate (vida do boss, vidas do jogador e pontos)
     // Passo 2: variaveis do jogo: vidas do jogador = 3, pontos por acerto = 10,
@@ -22,6 +22,18 @@ public class CombateManager : MonoBehaviour
     int pontos = 0;
     bool terminou = false;
     string mensagem = "";
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
     void OnEnable()
     {

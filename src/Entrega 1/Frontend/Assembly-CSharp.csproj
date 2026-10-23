@@ -51,8 +51,8 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/Notas/NoteSpawner.cs" />
     <Compile Include="Assets/Scripts/Notas/Note.cs" />
-    <Compile Include="Assets/Scripts/Combate/CombateManager.cs" />
     <Compile Include="Assets/Scripts/Core/GameEvents.cs" />
+    <Compile Include="Assets/Scripts/Combate/Combate.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
     <Compile Include="Assets/Scripts/Combate/HitZone.cs" />
   </ItemGroup>
