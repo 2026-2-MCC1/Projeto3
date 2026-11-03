@@ -59,7 +59,7 @@ public class Combate : MonoBehaviour
             if (vidasJogador <= 0)
             {
                 terminou = true;
-                mensagem = "VOCE PERDEU!";
+                // mensagem = "VOCE PERDEU!";
             }
         }
         else
@@ -71,22 +71,103 @@ public class Combate : MonoBehaviour
             {
                 vidaBoss = 0;
                 terminou = true;
-                mensagem = "VOCE VENCEU!";
+                // mensagem = "VOCE VENCEU!";
             }
         }
     }
 
+    // ---------- Placar (HUD) ----------
+    int vidaBossMax;
+    int vidasMax;
+    Texture2D pixel;
+
+    void Caixa(Rect r, Color cor)
+    {
+        Color antes = GUI.color;
+        GUI.color = cor;
+        GUI.DrawTexture(r, pixel);
+        GUI.color = antes;
+    }
+
+    // Texto com contorno preto, para ler por cima de qualquer fundo
+    void Texto(Rect r, string texto, GUIStyle estilo, Color cor, float borda)
+    {
+        Color original = estilo.normal.textColor;
+        estilo.normal.textColor = Color.black;
+        GUI.Label(new Rect(r.x - borda, r.y, r.width, r.height), texto, estilo);
+        GUI.Label(new Rect(r.x + borda, r.y, r.width, r.height), texto, estilo);
+        GUI.Label(new Rect(r.x, r.y - borda, r.width, r.height), texto, estilo);
+        GUI.Label(new Rect(r.x, r.y + borda, r.width, r.height), texto, estilo);
+        estilo.normal.textColor = cor;
+        GUI.Label(r, texto, estilo);
+        estilo.normal.textColor = original;
+    }
+
     void OnGUI()
     {
-        int tamanho = Screen.height / 20;
+        if (pixel == null)
+        {
+            pixel = new Texture2D(1, 1);
+            pixel.SetPixel(0, 0, Color.white);
+            pixel.Apply();
+        }
+        if (vidaBossMax == 0) vidaBossMax = Mathf.Max(1, vidaBoss);
+        if (vidasMax == 0) vidasMax = Mathf.Max(1, vidasJogador);
+
+        float u = Screen.height / 20f;
+        float borda = Mathf.Max(1f, u * 0.06f);
 
         GUIStyle estilo = new GUIStyle(GUI.skin.label);
-        estilo.fontSize = tamanho;
-        estilo.normal.textColor = Color.yellow;
+        estilo.fontSize = Mathf.RoundToInt(u * 0.8f);
+        estilo.fontStyle = FontStyle.Bold;
+        estilo.alignment = TextAnchor.MiddleLeft;
+        estilo.wordWrap = false;
 
-        GUI.Label(new Rect(20, 20, tamanho * 12, tamanho * 1.5f), "Vida do Boss: " + vidaBoss, estilo);
-        GUI.Label(new Rect(20, 20 + tamanho * 1.5f, tamanho * 12, tamanho * 1.5f), "Vidas: " + vidasJogador, estilo);
-        GUI.Label(new Rect(20, 20 + tamanho * 3, tamanho * 12, tamanho * 1.5f), "Pontos: " + pontos, estilo);
-        GUI.Label(new Rect(20, 20 + tamanho * 4.5f, tamanho * 12, tamanho * 1.5f), mensagem, estilo);
+        // Painel no canto superior esquerdo: fundo escuro + borda rosa
+        float margem = u * 0.5f;
+        float w = u * 8f;
+        float h = u * 5.6f;
+        Rect painel = new Rect(margem, margem, w, h);
+        Caixa(new Rect(painel.x - 4, painel.y - 4, painel.width + 8, painel.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
+        Caixa(painel, new Color(0.1f, 0.03f, 0.18f, 0.92f));
+
+        float x = painel.x + u * 0.5f;
+        float iw = painel.width - u;
+        float y = painel.y + u * 0.3f;
+
+        // Vida do boss: texto + barra
+        Texto(new Rect(x, y, iw, u * 1.1f), "BOSS   " + vidaBoss + " / " + vidaBossMax, estilo, new Color(1f, 0.9f, 0.3f), borda);
+        y += u * 1.2f;
+        Caixa(new Rect(x, y, iw, u * 0.7f), Color.black);
+        float fracao = Mathf.Clamp01((float)vidaBoss / vidaBossMax);
+        Color corBarra = fracao > 0.5f ? new Color(0.3f, 0.95f, 0.25f) : (fracao > 0.25f ? new Color(1f, 0.8f, 0.1f) : new Color(1f, 0.25f, 0.25f));
+        Caixa(new Rect(x + 3, y + 3, (iw - 6) * fracao, u * 0.7f - 6), corBarra);
+        y += u * 1.0f;
+
+        // Vidas do jogador: quadradinhos
+        Texto(new Rect(x, y, u * 3f, u * 1.1f), "VIDAS", estilo, Color.white, borda);
+        for (int i = 0; i < vidasMax; i++)
+        {
+            float qx = x + u * 3.4f + i * u * 1.1f;
+            Caixa(new Rect(qx - 2, y + u * 0.15f - 2, u * 0.8f + 4, u * 0.8f + 4), Color.black);
+            Color c = i < vidasJogador ? new Color(1f, 0.25f, 0.5f) : new Color(0.35f, 0.35f, 0.4f);
+            Caixa(new Rect(qx, y + u * 0.15f, u * 0.8f, u * 0.8f), c);
+        }
+        y += u * 1.2f;
+
+        // Pontos
+        Texto(new Rect(x, y, iw, u * 1.1f), "PONTOS   " + pontos, estilo, new Color(0.5f, 1f, 1f), borda);
+
+        // Mensagem final no centro da tela
+        if (mensagem != "")
+        {
+            estilo.fontSize = Mathf.RoundToInt(u * 2f);
+            estilo.alignment = TextAnchor.MiddleCenter;
+            float mw = u * 14f, mh = u * 3f;
+            Rect caixa = new Rect((Screen.width - mw) / 2f, (Screen.height - mh) / 2f, mw, mh);
+            Caixa(new Rect(caixa.x - 4, caixa.y - 4, caixa.width + 8, caixa.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
+            Caixa(caixa, new Color(0.1f, 0.03f, 0.18f, 0.95f));
+            Texto(caixa, mensagem, estilo, new Color(1f, 0.9f, 0.3f), borda * 1.5f);
+        }
     }
 }
