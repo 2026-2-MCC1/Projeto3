@@ -114,16 +114,28 @@ Os valores de balanceamento (dano por acerto, vida do boss, velocidade das notas
 ## 🛠 Estrutura de pastas
 
 ```
-Raiz
-├── documentos
-│   └── GDD_TurtleHero_v1_15.docx
-├── executáveis
-│   └── windows
-├── imagens
-├── src
-│   ├── Assets
-│   ├── Packages
-│   └── ProjectSettings
+Projeto3/
+├── documentos/
+│   ├── Entrega 1/
+│   │   ├── Ética e Pensamento Computacional/
+│   │   ├── Jogos Digitais e Sistemas Digitais Interativos/
+│   │   ├── Algoritmos e Lógica de Programação/
+│   │   ├── Projeto Interdisciplinar: Jogos Digitais/
+│   │   └── Cálculo I/
+│   ├── Entrega 2/
+│   │   ├── Ética e Pensamento Computacional/
+│   │   ├── Jogos Digitais e Sistemas Digitais Interativos/
+│   │   ├── Algoritmos e Lógica de Programação/
+│   │   ├── Cálculo I/
+│   │   ├── Projeto Interdisciplinar: Jogos Digitais
+├── imagens/
+├── src/
+│   ├── Entrega 1/
+│   │   ├── Frontend/
+│   │   ├── Backend/
+│   └── Entrega 2/
+│       ├── Frontend/
+│       ├── Backend/
 └── README.md
 ```
 
