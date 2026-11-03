@@ -17,7 +17,7 @@ TurtleHero
 ## Descrição
 
 <p align="center">
-<img src="assets/logo-turtlehero.png" alt="TurtleHero" border="0">
+<img src="assets/turtlehero.png" alt="TurtleHero" border="0">
 </p>
 
 **TurtleHero** é um jogo de ritmo 3D, no estilo *Guitar Hero*, desenvolvido na **Unity** com **C#**. O jogador controla a **TurtleHero** (a Tortuguita transformada em guerreira do sabor) e acompanha notas que descem por 4 pistas, apertando o botão correspondente quando elas chegam à zona de acerto. Cada acerto causa dano ao boss; cada erro custa uma das 3 vidas.
