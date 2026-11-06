@@ -285,7 +285,6 @@ GameObject:
   - component: {fileID: 1075870558}
   - component: {fileID: 1075870557}
   - component: {fileID: 1075870556}
-  - component: {fileID: 1075870559}
   m_Layer: 5
   m_Name: CaixaTextoHistoria
   m_TagString: Untagged
@@ -300,7 +299,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075870554}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -310,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 508.93066, y: 556}
-  m_SizeDelta: {x: 653.5017, y: 744.7801}
+  m_AnchoredPosition: {x: 658.0107, y: 714.5628}
+  m_SizeDelta: {x: 788.3113, y: 973.37036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1075870556
 MonoBehaviour:
@@ -365,26 +364,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075870554}
   m_CullTransparentMesh: 1
---- !u!114 &1075870559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075870554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618327d71252f354aac5b493e5d398dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextoRolagem
-  textoStory: {fileID: 1504585507}
-  fadeCanvasGroup: {fileID: 1824809952}
-  velocidade: 0.01
-  distanciaParaSubir: 1e+22
-  tempoEsperaInicio: 3
-  tempoEsperaAposFim: 3
-  duracaoFade: 2
-  nomeProximaCena: Phase1
 --- !u!1 &1504585504
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,8 +399,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -14, y: 349}
-  m_SizeDelta: {x: 558.7096, y: 714.1799}
+  m_AnchoredPosition: {x: -0.002105713, y: 486.99988}
+  m_SizeDelta: {x: 788.32, y: 971.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504585506
 MonoBehaviour:
@@ -435,14 +414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618327d71252f354aac5b493e5d398dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextoRolagem
-  textoStory: {fileID: 0}
-  fadeCanvasGroup: {fileID: 0}
   velocidade: 50
-  distanciaParaSubir: 800
-  tempoEsperaInicio: 3
+  tempoDePausa: 2
   tempoEsperaAposFim: 1.5
-  duracaoFade: 1.5
-  nomeProximaCena: Phase1
 --- !u!114 &1504585507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,27 +437,68 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "No mundo doce da Arcor, existia uma m\xFAsica que ningu\xE9m sabia de
-    onde vinha.\n\nEra a BATIDA DOCE.\n\nSempre que ela tocava, um doce despertava
-    uma lembran\xE7a: o primeiro Bon o Bon, o chiclete do recreio, o caramelo da
-    casa da v\xF3. Quem provava, sentia tudo de novo.\n\nEssas lembran\xE7as ficavam
-    guardadas na CAIXA DE BOMBOM, o cora\xE7\xE3o do mundo.\n\nMas o tempo passou.
-    As pessoas cresceram, ficaram ocupadas e passaram a s\xF3 olhar fotos antigas,
-    sem sentir nada. A m\xFAsica foi ficando cada vez mais baixa.\n\nAt\xE9 que,
-    um dia, ela parou.\n\nFoi o SIL\xCANCIO.\n\nE o sil\xEAncio fez algo terr\xEDvel.
-    Ele procurou os doces que mais tinham sido esquecidos e tomou a parte deles que
-    ningu\xE9m lembrava mais.\n\nO Big Big foi mascado at\xE9 perder o sabor, e virou
-    o BIG BIG BIG\xC3O, preso ao passado.\n\nO 7Belo, que passava de av\xF4 para
-    neto, foi deixado de lado por todos, e virou o 7BELOS, que embaralha as lembran\xE7as.\n\nA
-    Plutonita, que um dia foi febre, caiu no esquecimento, e virou a PLUTONITA, um
-    planeta frio e sozinho.\n\nCada chefe \xE9 um doce que ningu\xE9m lembrou de
-    lembrar. E, com raiva, eles capturaram 12 doces e os trancaram em suas fortalezas,
-    para que todos sentissem o mesmo vazio.\n\nS\xF3 uma ouviu o \xFAltimo eco da
-    m\xFAsica: a Tortuguita. O casco dela come\xE7ou a vibrar no ritmo que restava,
-    e ela se transformou na TURTLEHERO, a guerreira do sabor.\n\nO sil\xEAncio s\xF3
-    se quebra com m\xFAsica. Cada nota certa \xE9 um golpe. Cada doce libertado \xE9
-    uma lembran\xE7a que volta.\n\nAcerte o ritmo.\n\nSua jornada come\xE7a na fortaleza
-    do Big Big Big\xE3o."
+  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+    in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit. Curabitur vitae egestas erat. Aliquam
+    nec enim eget felis dictum ultrices. Phasellus dictum justo id ex blandit, sed
+    feugiat magna interdum. Mauris dictum arcu id nisl rhoncus, et tristique mi tincidunt.
+    Cras sed lacus vitae felis vulputate pretium. In hac habitasse platea dictumst.
+    Vestibulum cursus, tortor id molestie aliquet, eros ligula blandit lorem, non
+    convallis diam risus eget sem.
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Etiam finibus massa in dictum finibus. Suspendisse potenti. Integer molestie
+    augue nec est fringilla pharetra. Class aptent taciti sociosqu ad litora torquent
+    per conubia nostra, per inceptos himenaeos. Proin vitae libero dolor. Fusce volutpat,
+    sapien eget dapibus elementum, sem nunc efficitur nunc, a facilisis erat felis
+    nec sem. Aliquam in sollicitudin risus.Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem
+    ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae egestas erat.
+    Aliquam nec enim eget felis dictum ultrices. Phasellus dictum justo id ex blandit,
+    sed feugiat magna interdum. Mauris dictum arcu id nisl rhoncus, et tristique
+    mi tincidunt. Cras sed lacus vitae felis vulputate pretium. In hac habitasse
+    platea dictumst. Vestibulum cursus, tortor id molestie aliquet, eros ligula blandit
+    lorem, non convallis diam risus eget sem.
+
+    Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Etiam finibus massa in dictum finibus. Suspendisse potenti.
+    Integer molestie augue nec est fringilla pharetra. Class aptent taciti sociosqu
+    ad litora torquent per conubia nostra, per inceptos himenaeos. Proin vitae libero
+    dolor. Fusce volutpat, sapien eget dapibus elementum, sem nunc efficitur nunc,
+    a facilisis erat felis nec sem. Aliquam in sollicitudin risus.Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+    id est laborum.
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Curabitur vitae egestas erat. Aliquam nec enim eget felis dictum ultrices. Phasellus
+    dictum justo id ex blandit, sed feugiat magna interdum. Mauris dictum arcu id
+    nisl rhoncus, et tristique mi tincidunt. Cras sed lacus vitae felis vulputate
+    pretium. In hac habitasse platea dictumst. Vestibulum cursus, tortor id molestie
+    aliquet, eros ligula blandit lorem, non convallis diam risus eget sem.
+
+    Lorem
+    ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus massa in dictum
+    finibus. Suspendisse potenti. Integer molestie augue nec est fringilla pharetra.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+    himenaeos. Proin vitae libero dolor. Fusce volutpat, sapien eget dapibus elementum,
+    sem nunc efficitur nunc, a facilisis erat felis nec sem. Aliquam in sollicitudin
+    risus.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -690,94 +705,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1824809950
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1824809951}
-  - component: {fileID: 1824809954}
-  - component: {fileID: 1824809953}
-  - component: {fileID: 1824809952}
-  m_Layer: 5
-  m_Name: "FundoTransi\xE7\xE3o"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1824809951
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824809950}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1926416924}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 46.9388, y: 28.1633}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &1824809952
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824809950}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &1824809953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824809950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1824809954
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824809950}
-  m_CullTransparentMesh: 1
 --- !u!1 &1857361555
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +892,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 105799494}
-  - {fileID: 1824809951}
   - {fileID: 1075870555}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
