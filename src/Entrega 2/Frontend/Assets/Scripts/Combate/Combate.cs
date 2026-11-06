@@ -1,39 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Combate : MonoBehaviour
 {
-    // Passo 1: criar o script que cuida do combate (vida do boss, vidas do jogador e pontos)
-    // Passo 2: variaveis do jogo: vidas do jogador = 3, pontos por acerto = 10,
-    //          dano que o boss leva por acerto = 10 e vida do boss = 100
-    // Passo 3: guardar o que o script precisa lembrar: os pontos do jogador, se o jogo já acabou
-    //          (ganhando ou perdendo) e a mensagem final
-    // Passo 4: fazer o combate ficar de olho no HitZone, para saber toda vez que o jogador acerta ou erra.
-    //          Sem isso o combate nunca ficaria sabendo e a vida e os pontos não mudariam.
-    //          Quando o combate sair da cena, ele para de olhar, para não dar erro
-    // Passo 5: quando o jogador errar: tirar 1 vida; se as vidas acabarem, o jogo acaba e ele perdeu
-    // Passo 6: quando o jogador acertar: tirar vida do boss e dar pontos; se a vida do boss acabar, ele venceu
-    // Passo 7: mostrar na tela a vida do boss, as vidas, os pontos e a mensagem final
-
     public int vidaBoss = 250;
     public int danoPorAcerto = 10;
     public int vidasJogador = 3;
     public int pontosJogador = 10;
 
+    [Header("Cenas de Transição")]
+    public string nomeCenaDerrota = "TelaDerrota";
+    public string nomeCenaVitoria = "TelaVitoria";
+
     int pontos = 0;
     bool terminou = false;
     string mensagem = "";
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnEnable()
     {
@@ -47,33 +28,43 @@ public class Combate : MonoBehaviour
 
     void AoJulgarNota(Judgment julgamento)
     {
-        if (terminou == true)
-        {
-            return;
-        }
+        if (terminou == true) return;
 
         if (julgamento == Judgment.Miss)
         {
             vidasJogador--;
-
             if (vidasJogador <= 0)
             {
+                vidasJogador = 0;
                 terminou = true;
-                // mensagem = "VOCE PERDEU!";
+                mensagem = "VOCE PERDEU!";
+                StartCoroutine(IrParaDerrota());
             }
         }
         else
         {
             vidaBoss -= danoPorAcerto;
             pontos += pontosJogador;
-
             if (vidaBoss <= 0)
             {
                 vidaBoss = 0;
                 terminou = true;
-                // mensagem = "VOCE VENCEU!";
+                mensagem = "VOCE VENCEU!";
+                StartCoroutine(IrParaVitoria());
             }
         }
+    }
+
+    System.Collections.IEnumerator IrParaDerrota()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(nomeCenaDerrota);
+    }
+
+    System.Collections.IEnumerator IrParaVitoria()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(nomeCenaVitoria);
     }
 
     // ---------- Placar (HUD) ----------
@@ -89,7 +80,6 @@ public class Combate : MonoBehaviour
         GUI.color = antes;
     }
 
-    // Texto com contorno preto, para ler por cima de qualquer fundo
     void Texto(Rect r, string texto, GUIStyle estilo, Color cor, float borda)
     {
         Color original = estilo.normal.textColor;
@@ -123,51 +113,70 @@ public class Combate : MonoBehaviour
         estilo.alignment = TextAnchor.MiddleLeft;
         estilo.wordWrap = false;
 
-        // Painel no canto superior esquerdo: fundo escuro + borda rosa
-        float margem = u * 0.5f;
-        float w = u * 8f;
-        float h = u * 5.6f;
-        Rect painel = new Rect(margem, margem, w, h);
-        Caixa(new Rect(painel.x - 4, painel.y - 4, painel.width + 8, painel.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
-        Caixa(painel, new Color(0.1f, 0.03f, 0.18f, 0.92f));
+        // Barra do Boss
+        float bossW = u * 12f;
+        float bossH = u * 2.2f;
+        float bossX = (Screen.width - bossW) / 2f;
+        float bossY = (Screen.height / 2f) - (u * 4f);
 
-        float x = painel.x + u * 0.5f;
-        float iw = painel.width - u;
-        float y = painel.y + u * 0.3f;
+        Rect painelBoss = new Rect(bossX, bossY, bossW, bossH);
+        Caixa(new Rect(painelBoss.x - 4, painelBoss.y - 4, painelBoss.width + 8, painelBoss.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
+        Caixa(painelBoss, new Color(0.1f, 0.03f, 0.18f, 0.92f));
 
-        // Vida do boss: texto + barra
-        Texto(new Rect(x, y, iw, u * 1.1f), "BOSS   " + vidaBoss + " / " + vidaBossMax, estilo, new Color(1f, 0.9f, 0.3f), borda);
-        y += u * 1.2f;
-        Caixa(new Rect(x, y, iw, u * 0.7f), Color.black);
+        float bx = painelBoss.x + u * 0.6f;
+        float biw = painelBoss.width - (u * 1.2f);
+        float by = painelBoss.y + u * 0.25f;
+
+        estilo.alignment = TextAnchor.MiddleCenter;
+        Texto(new Rect(bx, by, biw, u * 0.9f), "BOSS   " + vidaBoss + " / " + vidaBossMax, estilo, new Color(1f, 0.9f, 0.3f), borda);
+        by += u * 0.95f;
+
+        Caixa(new Rect(bx, by, biw, u * 0.6f), Color.black);
         float fracao = Mathf.Clamp01((float)vidaBoss / vidaBossMax);
         Color corBarra = fracao > 0.5f ? new Color(0.3f, 0.95f, 0.25f) : (fracao > 0.25f ? new Color(1f, 0.8f, 0.1f) : new Color(1f, 0.25f, 0.25f));
-        Caixa(new Rect(x + 3, y + 3, (iw - 6) * fracao, u * 0.7f - 6), corBarra);
-        y += u * 1.0f;
+        Caixa(new Rect(bx + 2, by + 2, (biw - 4) * fracao, u * 0.6f - 4), corBarra);
 
-        // Vidas do jogador: quadradinhos
-        Texto(new Rect(x, y, u * 3f, u * 1.1f), "VIDAS", estilo, Color.white, borda);
+        estilo.alignment = TextAnchor.MiddleLeft;
+
+        // Vidas e Pontuação
+        float margem = u * 0.5f;
+        float painelDirW = u * 8f;
+        float painelDirH = u * 4.2f;
+        float painelDirX = Screen.width - painelDirW - margem;
+        float painelDirY = margem;
+
+        Rect painelInfo = new Rect(painelDirX, painelDirY, painelDirW, painelDirH);
+        Caixa(new Rect(painelInfo.x - 4, painelInfo.y - 4, painelInfo.width + 8, painelInfo.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
+        Caixa(painelInfo, new Color(0.1f, 0.03f, 0.18f, 0.92f));
+
+        float ix = painelInfo.x + u * 0.5f;
+        float iwi = painelInfo.width - u;
+        float iy = painelInfo.y + u * 0.3f;
+
+        Texto(new Rect(ix, iy, u * 2.5f, u * 1.1f), "VIDAS", estilo, Color.white, borda);
         for (int i = 0; i < vidasMax; i++)
         {
-            float qx = x + u * 3.4f + i * u * 1.1f;
-            Caixa(new Rect(qx - 2, y + u * 0.15f - 2, u * 0.8f + 4, u * 0.8f + 4), Color.black);
+            float qx = ix + u * 2.6f + (i * u * 0.9f);
+            Caixa(new Rect(qx - 2, iy + u * 0.15f - 2, u * 0.8f + 4, u * 0.8f + 4), Color.black);
             Color c = i < vidasJogador ? new Color(1f, 0.25f, 0.5f) : new Color(0.35f, 0.35f, 0.4f);
-            Caixa(new Rect(qx, y + u * 0.15f, u * 0.8f, u * 0.8f), c);
+            Caixa(new Rect(qx, iy + u * 0.15f, u * 0.8f, u * 0.8f), c);
         }
-        y += u * 1.2f;
+        iy += u * 1.2f;
 
-        // Pontos
-        Texto(new Rect(x, y, iw, u * 1.1f), "PONTOS   " + pontos, estilo, new Color(0.5f, 1f, 1f), borda);
+        Texto(new Rect(ix, iy, iwi, u * 1.1f), "PONTOS   " + pontos, estilo, new Color(0.5f, 1f, 1f), borda);
 
-        // Mensagem final no centro da tela
+        // Mensagem Final
         if (mensagem != "")
         {
             estilo.fontSize = Mathf.RoundToInt(u * 2f);
             estilo.alignment = TextAnchor.MiddleCenter;
-            float mw = u * 14f, mh = u * 3f;
-            Rect caixa = new Rect((Screen.width - mw) / 2f, (Screen.height - mh) / 2f, mw, mh);
-            Caixa(new Rect(caixa.x - 4, caixa.y - 4, caixa.width + 8, caixa.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
-            Caixa(caixa, new Color(0.1f, 0.03f, 0.18f, 0.95f));
-            Texto(caixa, mensagem, estilo, new Color(1f, 0.9f, 0.3f), borda * 1.5f);
+            float mw = u * 14f;
+            float mh = u * 3f;
+            Rect caixaMsg = new Rect((Screen.width - mw) / 2f, (Screen.height - mh) / 2f, mw, mh);
+
+            Caixa(new Rect(caixaMsg.x - 4, caixaMsg.y - 4, caixaMsg.width + 8, caixaMsg.height + 8), new Color(1f, 0.45f, 0.8f, 1f));
+            Caixa(caixaMsg, new Color(0.1f, 0.03f, 0.18f, 0.95f));
+            Texto(caixaMsg, mensagem, estilo, new Color(1f, 0.9f, 0.3f), borda * 1.5f);
         }
     }
 }
