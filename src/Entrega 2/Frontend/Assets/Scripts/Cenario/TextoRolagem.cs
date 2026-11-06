@@ -1,73 +1,87 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
-public class TextoRolagem : MonoBehaviour
+public class TextRolagem : MonoBehaviour
 {
-    [Header("Configurações da Rolagem")]
-    public float velocidade = 25f;
-    public float tempoDePausa = 2f;
+    public TextMeshProUGUI textoStory;
+    public CanvasGroup fadeCanvasGroup;
+    public float velocidade = 150f;
+    public float distanciaParaSubir = 800f; // Quantos pixels o texto vai andar para cima a partir de onde o puseste
+    public float tempoEsperaInicio = 3.0f;
     public float tempoEsperaAposFim = 1.5f;
+    public float duracaoFade = 1.5f;
+    public string nomeProximaCena = "Phase1";
 
     private RectTransform rectTransform;
-    private float cronometro = 0f;
-    private bool textoAcabou = false;
-    private CanvasGroup canvasGroup;
-    private float alturaLimiteCalculada;
+    private float posYInicial;
+    private float posYFinal;
+    private bool aRolar = false;
 
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
+        if (textoStory == null)
+            textoStory = GetComponent<TextMeshProUGUI>();
 
-        // Adiciona ou obtém o CanvasGroup para o efeito de fade out
-        canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        }
+        rectTransform = textoStory.GetComponent<RectTransform>();
 
-        // Calcula a altura do texto + a altura da tela para garantir que ele suba COMPLETAMENTE
-        float alturaTexto = rectTransform.rect.height;
-        alturaLimiteCalculada = rectTransform.anchoredPosition.y + alturaTexto + Screen.height;
+        // Guarda a posição exata onde o colocaste no Unity
+        posYInicial = rectTransform.anchoredPosition.y;
+
+        // Calcula o limite final automaticamente somando a distância à posição inicial
+        posYFinal = posYInicial + distanciaParaSubir;
+
+        // Garante que o ecrã começa transparente
+        if (fadeCanvasGroup != null)
+            fadeCanvasGroup.alpha = 0f;
+
+        StartCoroutine(EsperarParaComecar());
+    }
+
+    IEnumerator EsperarParaComecar()
+    {
+        // Congela o texto na posição inicial durante 3 segundos
+        yield return new WaitForSeconds(tempoEsperaInicio);
+
+        // Liberta o movimento
+        aRolar = true;
     }
 
     void Update()
     {
-        if (textoAcabou) return;
+        if (!aRolar) return;
 
-        if (cronometro < tempoDePausa)
-        {
-            cronometro += Time.deltaTime;
-            return;
-        }
-
-        Vector3 novaPosicao = rectTransform.anchoredPosition;
+        // Move o texto para cima
+        Vector2 novaPosicao = rectTransform.anchoredPosition;
         novaPosicao.y += velocidade * Time.deltaTime;
         rectTransform.anchoredPosition = novaPosicao;
 
-        // Só ativa a transição quando todo o texto ultrapassar a tela
-        if (novaPosicao.y >= alturaLimiteCalculada)
+        // Quando atingir o limite calculado, para e faz a transição
+        if (novaPosicao.y >= posYFinal)
         {
-            textoAcabou = true;
-            StartCoroutine(SumirEIniciarJogo());
+            aRolar = false;
+            StartCoroutine(TransicaoSuaveECarregar());
         }
     }
 
-    System.Collections.IEnumerator SumirEIniciarJogo()
+    IEnumerator TransicaoSuaveECarregar()
     {
-        float tempoDecorrido = 0f;
-        float duracaoFade = 1f;
+        yield return new WaitForSeconds(tempoEsperaAposFim);
 
-        while (tempoDecorrido < duracaoFade)
+        if (fadeCanvasGroup != null)
         {
-            tempoDecorrido += Time.deltaTime;
-            if (canvasGroup != null)
+            float tempoPassado = 0f;
+            while (tempoPassado < duracaoFade)
             {
-                canvasGroup.alpha = Mathf.Lerp(1f, 0f, tempoDecorrido / duracaoFade);
+                tempoPassado += Time.deltaTime;
+                fadeCanvasGroup.alpha = Mathf.Lerp(0f, 1f, tempoPassado / duracaoFade);
+                yield return null;
             }
-            yield return null;
+            fadeCanvasGroup.alpha = 1f;
         }
 
-        yield return new WaitForSeconds(tempoEsperaAposFim);
-        SceneManager.LoadScene("Fase1");
+        PlayerPrefs.SetString("UltimaFaseJogada", nomeProximaCena);
+        SceneManager.LoadScene(nomeProximaCena);
     }
 }
