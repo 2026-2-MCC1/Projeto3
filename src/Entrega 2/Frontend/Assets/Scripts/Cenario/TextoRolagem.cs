@@ -4,43 +4,62 @@ using UnityEngine.SceneManagement;
 public class TextoRolagem : MonoBehaviour
 {
     [Header("Configurações da Rolagem")]
-    public float velocidade = 25f;
-    public float tempoDePausa = 2f;
+    public float tempoDePausaInicial = 2f;      // Tempo parado no início antes de começar a rolar
+    public float velocidadeRolagem = 120f;      // Velocidade de subida (podes ajustar no Inspector se estiver muito rápido ou lento)
+    public float tempoDePausaFinal = 3f;        // Tempo parado no topo antes de mudar de cena
+
+    [Header("Limite Fixo")]
+    public float posicaoAlvoY = 5900f;          // Ponto exato em Y onde a história termina
 
     private RectTransform rectTransform;
-    private float cronometro = 0f;
+    private float cronometroInicio = 0f;
+    private float cronometroFim = 0f;
+    private bool textoChegouAoFim = false;
     private bool textoAcabou = false;
-    private float alturaLimiteCalculada;
 
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-
-        // Calcula a altura do texto + a altura da tela para garantir que ele suba completamente.
-        float alturaTexto = rectTransform.rect.height;
-        alturaLimiteCalculada = rectTransform.anchoredPosition.y + alturaTexto + Screen.height;
     }
 
     void Update()
     {
         if (textoAcabou) return;
 
-        if (cronometro < tempoDePausa)
+        // 1. Pausa inicial antes de começar a rolar
+        if (cronometroInicio < tempoDePausaInicial)
         {
-            cronometro += Time.deltaTime;
+            cronometroInicio += Time.deltaTime;
             return;
         }
 
-        Vector3 novaPosicao = rectTransform.anchoredPosition;
-        novaPosicao.y += velocidade * Time.deltaTime;
-        rectTransform.anchoredPosition = novaPosicao;
-
-        // Quando a história termina, inicia a primeira fase sem tela de transição.
-        if (novaPosicao.y >= alturaLimiteCalculada)
+        // 2. Movimento de subida do texto
+        if (!textoChegouAoFim)
         {
-            textoAcabou = true;
-            GameSession.NovoJogo();
-            SceneManager.LoadScene("Phase1");
+            Vector3 novaPosicao = rectTransform.anchoredPosition;
+            novaPosicao.y += velocidadeRolagem * Time.deltaTime;
+            rectTransform.anchoredPosition = novaPosicao;
+
+            // Quando o texto atinge exatamente a posição Y 5900
+            if (novaPosicao.y >= posicaoAlvoY)
+            {
+                novaPosicao.y = posicaoAlvoY; // Trava exatamente no limite
+                rectTransform.anchoredPosition = novaPosicao;
+                textoChegouAoFim = true;
+            }
+            return;
         }
+
+        // 3. Pausa final no topo para o jogador ler a última frase antes de mudar de cena
+        if (cronometroFim < tempoDePausaFinal)
+        {
+            cronometroFim += Time.deltaTime;
+            return;
+        }
+
+        // 4. Inicia a primeira fase
+        textoAcabou = true;
+        GameSession.NovoJogo();
+        SceneManager.LoadScene("Phase1");
     }
 }

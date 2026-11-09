@@ -273,6 +273,276 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105799493}
   m_CullTransparentMesh: 1
+--- !u!1 &231397946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231397947}
+  - component: {fileID: 231397950}
+  - component: {fileID: 231397949}
+  - component: {fileID: 231397948}
+  m_Layer: 5
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &231397947
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231397946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 931083559}
+  m_Father: {fileID: 1926416924}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 491, y: -433}
+  m_SizeDelta: {x: 513.4065, y: 102.6178}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &231397948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231397946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 231397949}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2122229561}
+        m_TargetAssemblyTypeName: GerenciadorMenu, Assembly-CSharp
+        m_MethodName: TenteNovamentePhase1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &231397949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231397946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.7254902, b: 0.18431373, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &231397950
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231397946}
+  m_CullTransparentMesh: 1
+--- !u!1 &931083558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 931083559}
+  - component: {fileID: 931083561}
+  - component: {fileID: 931083560}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &931083559
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931083558}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 231397947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &931083560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931083558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Pular Historia
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 2cfb4cdee7e02484cb41d8e6c18da2dd, type: 2}
+  m_sharedMaterial: {fileID: 5780504331342851220, guid: 2cfb4cdee7e02484cb41d8e6c18da2dd, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4279594522
+  m_fontColor: {r: 0.101960786, g: 0.43137255, b: 0.08235294, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 60
+  m_fontSizeBase: 60
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &931083561
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931083558}
+  m_CullTransparentMesh: 1
 --- !u!1 &1075870554
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,8 +579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 658.0107, y: 714.5628}
-  m_SizeDelta: {x: 788.3113, y: 973.37036}
+  m_AnchoredPosition: {x: 490.83313, y: 537.59094}
+  m_SizeDelta: {x: 583.582, y: 729.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1075870556
 MonoBehaviour:
@@ -399,8 +669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.002105713, y: 486.99988}
-  m_SizeDelta: {x: 788.32, y: 971.49}
+  m_AnchoredPosition: {x: -0.000011444, y: 364.76}
+  m_SizeDelta: {x: 540.3083, y: 700.5363}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1504585506
 MonoBehaviour:
@@ -414,9 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618327d71252f354aac5b493e5d398dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextoRolagem
-  velocidade: 50
-  tempoDePausa: 2
-  tempoEsperaAposFim: 1.5
+  tempoDePausaInicial: 3
+  velocidadeRolagem: 60
+  tempoDePausaFinal: 3
+  posicaoAlvoY: 5900
 --- !u!114 &1504585507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,68 +708,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
-
-    Lorem ipsum dolor
-    sit amet, consectetur adipiscing elit. Curabitur vitae egestas erat. Aliquam
-    nec enim eget felis dictum ultrices. Phasellus dictum justo id ex blandit, sed
-    feugiat magna interdum. Mauris dictum arcu id nisl rhoncus, et tristique mi tincidunt.
-    Cras sed lacus vitae felis vulputate pretium. In hac habitasse platea dictumst.
-    Vestibulum cursus, tortor id molestie aliquet, eros ligula blandit lorem, non
-    convallis diam risus eget sem.
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing
-    elit. Etiam finibus massa in dictum finibus. Suspendisse potenti. Integer molestie
-    augue nec est fringilla pharetra. Class aptent taciti sociosqu ad litora torquent
-    per conubia nostra, per inceptos himenaeos. Proin vitae libero dolor. Fusce volutpat,
-    sapien eget dapibus elementum, sem nunc efficitur nunc, a facilisis erat felis
-    nec sem. Aliquam in sollicitudin risus.Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    Lorem
-    ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae egestas erat.
-    Aliquam nec enim eget felis dictum ultrices. Phasellus dictum justo id ex blandit,
-    sed feugiat magna interdum. Mauris dictum arcu id nisl rhoncus, et tristique
-    mi tincidunt. Cras sed lacus vitae felis vulputate pretium. In hac habitasse
-    platea dictumst. Vestibulum cursus, tortor id molestie aliquet, eros ligula blandit
-    lorem, non convallis diam risus eget sem.
-
-    Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Etiam finibus massa in dictum finibus. Suspendisse potenti.
-    Integer molestie augue nec est fringilla pharetra. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos. Proin vitae libero
-    dolor. Fusce volutpat, sapien eget dapibus elementum, sem nunc efficitur nunc,
-    a facilisis erat felis nec sem. Aliquam in sollicitudin risus.Lorem ipsum dolor
-    sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-    id est laborum.
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Curabitur vitae egestas erat. Aliquam nec enim eget felis dictum ultrices. Phasellus
-    dictum justo id ex blandit, sed feugiat magna interdum. Mauris dictum arcu id
-    nisl rhoncus, et tristique mi tincidunt. Cras sed lacus vitae felis vulputate
-    pretium. In hac habitasse platea dictumst. Vestibulum cursus, tortor id molestie
-    aliquet, eros ligula blandit lorem, non convallis diam risus eget sem.
-
-    Lorem
-    ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus massa in dictum
-    finibus. Suspendisse potenti. Integer molestie augue nec est fringilla pharetra.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-    himenaeos. Proin vitae libero dolor. Fusce volutpat, sapien eget dapibus elementum,
-    sem nunc efficitur nunc, a facilisis erat felis nec sem. Aliquam in sollicitudin
-    risus.'
+  m_text: "No mundo doce da Arcor, existia uma m\xFAsica que ningu\xE9m sabia de
+    onde vinha.\n\nEra a BATIDA DOCE.\n\nSempre que ela tocava, um doce despertava
+    uma lembran\xE7a: o primeiro Bon o Bon, o chiclete do recreio, o caramelo da
+    casa da v\xF3. Quem provava, sentia tudo de novo.\n\nEssas lembran\xE7as ficavam
+    guardadas na CAIXA DE BOMBOM, o cora\xE7\xE3o do mundo.\n\nMas o tempo passou.
+    As pessoas cresceram, ficaram ocupadas e passaram a s\xF3 olhar fotos antigas,
+    sem sentir nada. A m\xFAsica foi ficando cada vez mais baixa.\n\nAt\xE9 que,
+    um dia, ela parou.\n\nFoi o SIL\xCANCIO.\n\nE o sil\xEAncio fez algo terr\xEDvel.
+    Ele procurou os doces que mais tinham sido esquecidos e tomou a parte deles que
+    ningu\xE9m lembrava mais.\n\nO Big Big foi mascado at\xE9 perder o sabor, e virou
+    o BIG BIG BIG\xC3O, preso ao passado.\n\nO 7Belo, que passava de av\xF4 para
+    neto, foi deixado de lado por todos, e virou o 7BELOS, que embaralha as lembran\xE7as.\n\nA
+    Plutonita, que um dia foi febre, caiu no esquecimento, e virou a PLUTONITA, um
+    planeta frio e sozinho.\n\nCada chefe \xE9 um doce que ningu\xE9m lembrou de
+    lembrar. E, com raiva, eles capturaram 12 doces e os trancaram em suas fortalezas,
+    para que todos sentissem o mesmo vazio.\n\nS\xF3 uma ouviu o \xFAltimo eco da
+    m\xFAsica: a Tortuguita. O casco dela come\xE7ou a vibrar no ritmo que restava,
+    e ela se transformou na TURTLEHERO, a guerreira do sabor.\n\nO sil\xEAncio s\xF3
+    se quebra com m\xFAsica. Cada nota certa \xE9 um golpe. Cada doce libertado \xE9
+    uma lembran\xE7a que volta.\n\nAcerte o ritmo.\n\nSua jornada come\xE7a na fortaleza
+    do Big Big Big\xE3o."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -893,6 +1123,7 @@ RectTransform:
   m_Children:
   - {fileID: 105799494}
   - {fileID: 1075870555}
+  - {fileID: 231397947}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -900,6 +1131,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &2122229560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2122229562}
+  - component: {fileID: 2122229561}
+  m_Layer: 0
+  m_Name: GerenciadorMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2122229561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122229560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0115169c118918409337b258aa595ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GerenciadorMenu
+--- !u!4 &2122229562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122229560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 652.4602, y: 456.6029, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -908,3 +1183,4 @@ SceneRoots:
   - {fileID: 1582790376}
   - {fileID: 1926416924}
   - {fileID: 29948962}
+  - {fileID: 2122229562}

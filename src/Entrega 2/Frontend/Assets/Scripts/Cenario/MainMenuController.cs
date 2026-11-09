@@ -5,6 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("Painéis do Menu")]
     public GameObject painelAjustes;
+    public GameObject painelAtalhos;
     public GameObject fundoEscuro;
 
     public void JogarJogo()
@@ -22,6 +23,18 @@ public class MainMenuController : MonoBehaviour
     public void FecharAjustes()
     {
         if (painelAjustes != null) painelAjustes.SetActive(false);
+        if (fundoEscuro != null) fundoEscuro.SetActive(false);
+    }
+
+    public void AbrirAtalhos()
+    {
+        if (painelAtalhos != null) painelAtalhos.SetActive(true);
+        if (fundoEscuro != null) fundoEscuro.SetActive(true);
+    }
+
+    public void FecharAtalhos()
+    {
+        if (painelAtalhos != null) painelAtalhos.SetActive(false);
         if (fundoEscuro != null) fundoEscuro.SetActive(false);
     }
 
