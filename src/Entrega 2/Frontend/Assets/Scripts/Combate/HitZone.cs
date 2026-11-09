@@ -4,90 +4,106 @@ using UnityEngine.InputSystem;
 
 public class HitZone : MonoBehaviour
 {
-    // Passo 1: escolher as teclas do jogo (D, F, K, L) e guardar as informações da zona de acerto:
-    //          o cubo (arrastado no Inspector) onde a bolinha tem que estar e uma folga para acertar assim que ela encostar
-    // Passo 2: anotar quais bolinhas estão na tela agora, para saber quais dá para acertar
-    // Passo 3: ver se o jogador apertou alguma das teclas
-    // Passo 4: se apertou e tinha bolinha na zona: foi acerto, a bolinha some e o combate é avisado
-    // Passo 5: se apertou e não tinha bolinha na zona: foi erro e o combate é avisado
-    // Passo 6: se a bolinha passou da zona sem o jogador apertar: foi erro, a bolinha some e o combate é avisado
-    // Passo 7: criar um jeito de perguntar "tem alguma bolinha dentro da zona agora?".
-    //          É usado quando o jogador aperta uma tecla, para decidir se foi acerto ou erro
-
+    // As teclas D F K L correspondem às 4 pistas (da esquerda para a direita na tela).
     public Key[] teclas = { Key.D, Key.F, Key.K, Key.L };
 
-    public float espacoAMais = 0.25f;
+    // Pista (índice do NoteSpawner.laneX) de cada tecla: D = pista 3 ... L = pista 0.
+    public int[] pistaDaTecla = { 3, 2, 1, 0 };
+    public bool exigirPistaCorreta = true;
 
-    public Collider cubo;
+    public float espacoAMais = 0.25f;   // (mantido por compatibilidade com a cena)
+    public Collider cubo;               // centro da zona de acerto
+
+    [Header("Janelas de acerto (em segundos)")]
+    public float janelaPerfeito = 0.09f;
+    public float janelaBom = 0.22f;
 
     List<Note> notas = new List<Note>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    float ZonaZ()
     {
-
+        return cubo != null ? cubo.bounds.center.z : transform.position.z;
     }
 
-    // Update is called once per frame
+    float Tempo(Note n, float zonaZ)
+    {
+        float v = Mathf.Max(0.01f, n.Speed);
+        return (n.transform.position.z - zonaZ) / v;   // negativo = ainda não chegou
+    }
+
     void Update()
     {
-        notas.Clear();
+        if (GameSession.FaseEncerrada) return;
 
+        notas.Clear();
         foreach (Note nota in Note.Active)
         {
-            if (nota != null && nota.Direction != Vector3.zero)
-            {
-                notas.Add(nota);
-            }
+            if (nota != null && !nota.Judged && nota.Direction != Vector3.zero) notas.Add(nota);
         }
 
-        foreach (Key tecla in teclas)
-        {
-            if (Keyboard.current[tecla].wasPressedThisFrame)
-            {
-                Note notaNaZona = ProcurarNotaNaZona();
+        float zonaZ = ZonaZ();
+        Keyboard kb = Keyboard.current;
 
-                if (notaNaZona != null)
+        if (kb != null)
+        {
+            for (int i = 0; i < teclas.Length; i++)
+            {
+                if (!kb[teclas[i]].wasPressedThisFrame) continue;
+
+                int pista = (i < pistaDaTecla.Length) ? pistaDaTecla[i] : i;
+                GameEvents.LanePressed(pista);
+
+                Note alvo = ProcurarNota(pista, zonaZ);
+                if (alvo != null)
                 {
-                    notaNaZona.Consume();
-                    GameEvents.NoteJudged(Judgment.Perfect);
+                    float dt = Mathf.Abs(Tempo(alvo, zonaZ));
+                    Judgment j = dt <= janelaPerfeito ? Judgment.Perfect : Judgment.Good;
+                    alvo.Consume();
+                    notas.Remove(alvo);
+                    Julgar(pista, j);
                 }
                 else
                 {
-                    GameEvents.NoteJudged(Judgment.Miss);
+                    Julgar(pista, Judgment.Miss);
                 }
             }
         }
 
+        // notas que passaram da zona sem ser acertadas
         foreach (Note nota in notas)
         {
-            if (nota.Judged == false)
+            if (nota.Judged) continue;
+            if (Tempo(nota, zonaZ) > janelaBom)
             {
-                if (nota.transform.position.z > cubo.bounds.max.z + espacoAMais)
-                {
-                    nota.Consume();
-                    GameEvents.NoteJudged(Judgment.Miss);
-                }
+                nota.Consume();
+                Julgar(nota.Lane, Judgment.Miss);
             }
         }
     }
 
-    Note ProcurarNotaNaZona()
+    void Julgar(int pista, Judgment j)
     {
+        GameEvents.LaneJudged(pista, j);
+        GameEvents.NoteJudged(j);
+    }
+
+    Note ProcurarNota(int pista, float zonaZ)
+    {
+        Note melhor = null;
+        float melhorDt = float.MaxValue;
+
         foreach (Note nota in notas)
         {
-            if (nota.Judged == false)
-            {
-                float z = nota.transform.position.z;
-                bool dentroDaZona = z >= cubo.bounds.min.z - espacoAMais && z <= cubo.bounds.max.z + espacoAMais;
+            if (nota.Judged) continue;
+            if (exigirPistaCorreta && nota.Lane != pista) continue;
 
-                if (dentroDaZona == true)
-                {
-                    return nota;
-                }
+            float dt = Mathf.Abs(Tempo(nota, zonaZ));
+            if (dt <= janelaBom && dt < melhorDt)
+            {
+                melhor = nota;
+                melhorDt = dt;
             }
         }
-
-        return null;
+        return melhor;
     }
 }

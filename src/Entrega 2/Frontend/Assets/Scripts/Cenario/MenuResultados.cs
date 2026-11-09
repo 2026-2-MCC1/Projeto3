@@ -1,23 +1,22 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuResultados : MonoBehaviour
 {
-    // Avança automaticamente para a próxima cena na ordem do Build Settings
+    // Vai para a próxima fase (ou volta ao menu depois da última)
     public void AvancarProximaFase()
     {
-        int cenaAtual = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(cenaAtual + 1);
+        GameSession.IrParaProximaFaseOuFim();
     }
 
-    // Para reiniciar a fase atual automaticamente
+    // Recomeça a fase em que o jogador estava
     public void JogarNovamente()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameSession.CarregarFaseAtual();
     }
 
     public void VoltarMenu()
     {
-        SceneManager.LoadScene("MenuInicial");
+        // As telas de resultado não fazem mais parte do fluxo do jogo.
+        GameSession.EncerrarFase();
     }
 }

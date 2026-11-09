@@ -2,40 +2,34 @@ using UnityEngine;
 
 public class Combate : MonoBehaviour
 {
-    // Passo 1: criar o script que cuida do combate (vida do boss, vidas do jogador e pontos)
-    // Passo 2: variaveis do jogo: vidas do jogador = 3, pontos por acerto = 10,
-    //          dano que o boss leva por acerto = 10 e vida do boss = 100
-    // Passo 3: guardar o que o script precisa lembrar: os pontos do jogador, se o jogo já acabou
-    //          (ganhando ou perdendo) e a mensagem final
-    // Passo 4: fazer o combate ficar de olho no HitZone, para saber toda vez que o jogador acerta ou erra.
-    //          Sem isso o combate nunca ficaria sabendo e a vida e os pontos não mudariam.
-    //          Quando o combate sair da cena, ele para de olhar, para não dar erro
-    // Passo 5: quando o jogador errar: tirar 1 vida; se as vidas acabarem, o jogo acaba e ele perdeu
-    // Passo 6: quando o jogador acertar: tirar vida do boss e dar pontos; se a vida do boss acabar, ele venceu
-    // Passo 7: mostrar na tela a vida do boss, os pontos e a mensagem final (as vidas aparecem no VidasHUD, com sprites)
-
     public int vidaBoss = 250;
-    public int danoPorAcerto = 10;
+    public int danoPorAcerto = 10;     // dano de um acerto Perfeito (Bom causa 60%)
     public int vidasJogador = 3;
-    public int pontosJogador = 10;
+    public int pontosJogador = 10;     // pontos base de um Perfeito (Bom vale metade)
 
-    int pontos = 0;
+    [Header("Bônus de sequência de Perfeitos")]
+    public int comboPerfeitos = 3;     // quantos Perfeitos seguidos
+    public int danoCombo = 10;         // dano extra ao completar a sequência
+
+    int vidaBossMax;
+    int vidasMax;
     bool terminou = false;
-    string mensagem = "";
+    int sequenciaPerfeitos = 0;
+    int fase = 1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        fase = GameSession.FaseDaCenaAtual();
+        GameSession.IniciarFase(fase);
+    }
+
     void Start()
     {
-        // guarda os valores iniciais (o HUD de vidas e o placar precisam saber o maximo)
         vidaBossMax = Mathf.Max(1, vidaBoss);
         vidasMax = Mathf.Max(1, vidasJogador);
         GameEvents.PlayerLifeLost(vidasJogador, vidasMax);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameEvents.BossHealthChanged(vidaBoss, vidaBossMax);
+        GameEvents.ScoreChanged(0, 0, 1);
     }
 
     void OnEnable()
@@ -50,37 +44,54 @@ public class Combate : MonoBehaviour
 
     void AoJulgarNota(Judgment julgamento)
     {
-        if (terminou == true)
-        {
-            return;
-        }
+        if (terminou) return;
+
+        GameSession.Registrar(julgamento, pontosJogador);
+        GameEvents.ScoreChanged(GameSession.Pontos, GameSession.Combo, GameSession.Multiplicador);
 
         if (julgamento == Judgment.Miss)
         {
+            sequenciaPerfeitos = 0;
             vidasJogador--;
-            GameEvents.PlayerLifeLost(vidasJogador, vidasMax);
+            GameEvents.PlayerLifeLost(Mathf.Max(0, vidasJogador), vidasMax);
 
             if (vidasJogador <= 0)
             {
                 terminou = true;
-                // mensagem = "VOCE PERDEU!";
+                GameSession.EncerrarFase();
+                GameEvents.PlayerDefeated();
             }
         }
         else
         {
-            vidaBoss -= danoPorAcerto;
-            pontos += pontosJogador;
+            int dano = (julgamento == Judgment.Perfect) ? danoPorAcerto : Mathf.Max(1, danoPorAcerto * 6 / 10);
+
+            if (julgamento == Judgment.Perfect)
+            {
+                sequenciaPerfeitos++;
+                if (comboPerfeitos > 0 && sequenciaPerfeitos >= comboPerfeitos)
+                {
+                    sequenciaPerfeitos = 0;
+                    dano += danoCombo;
+                }
+            }
+            else
+            {
+                sequenciaPerfeitos = 0;
+            }
+
+            vidaBoss = Mathf.Max(0, vidaBoss - dano);
+            GameEvents.BossHealthChanged(vidaBoss, vidaBossMax);
 
             if (vidaBoss <= 0)
             {
-                vidaBoss = 0;
                 terminou = true;
-                // mensagem = "VOCE VENCEU!";
+                GameSession.ConcluirFase();
+                GameSession.EncerrarFase();
+                GameEvents.BossDefeated(fase);
+                GameEvents.PhaseCompleted(fase);
             }
         }
     }
-
-    int vidaBossMax;
-    int vidasMax;
 
 }

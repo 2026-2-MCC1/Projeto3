@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     [Header("Painéis do Menu")]
-    public GameObject painelAjustes; // Arrasta o PainelAjustes para aqui
-    public GameObject fundoEscuro;   // Arrasta o FundoEscuro para aqui
+    public GameObject painelAjustes;
+    public GameObject fundoEscuro;
 
     public void JogarJogo()
     {
+        GameSession.NovoJogo();
         SceneManager.LoadScene("Historia");
     }
 
